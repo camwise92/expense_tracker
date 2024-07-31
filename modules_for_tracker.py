@@ -1,5 +1,8 @@
 
 import json
+import sys
+import os
+os.system("cls")
 from datetime import datetime
 
 
@@ -7,12 +10,12 @@ def amount_function():
     while True:
         try:
             amount = input("Enter the amount: ")
-            if (amount.isalpha()) == False:
-                    break
+            if (amount.isalpha()) == False and "," not in amount :
+                break
             else:
                 raise ValueError
         except ValueError:
-            print("Invalid format. Please type numbers only.")
+            print("Invalid format. Please type numbers and decimal point only.")
     return amount
         
 def category_function():
@@ -76,7 +79,6 @@ def sum(data):
         recursive_search(data)
         return values
                 
-
     key_to_find = 'amount'
     values = find_key_values(data,key_to_find)
     values = [float(x) for x in values]
@@ -85,11 +87,22 @@ def sum(data):
     for transaction in values:
         sum += transaction
 
-    print(sum)
+    print(f"Current total: {sum}")
 
+
+def opening_options():
+    while True:
+        print("Expense Tracker\n==============\n")
+        create_or_open_file = input("Do you wish to create/open a file? Y/N ").upper()
+        if create_or_open_file == "Y":
+            break     
+        elif create_or_open_file == "N":
+            sys.exit("Exiting Program.")
+        else:
+            print("Invalid Input.")
+            
 
     
-        
 '''
 want to write a function that will go into parts of dict and return sum of things:
 

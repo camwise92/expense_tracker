@@ -13,14 +13,12 @@ location = os.path.dirname(os.path.abspath(sys.argv[0]))
 os.chdir(location)
   
 def main():
-    print("Expense Tracker\n==============\n")
+    modules_for_tracker.opening_options()
     read_expenses_from_json()
     enter_expenses()
-    modules_for_tracker.sum(expenses)
+    print("Exiting program.")
+  
     
-
-    
-
 expenses = {}
 expense_item_number = 0
 
@@ -28,16 +26,15 @@ def enter_expenses():
     while True:
         global expense_item_number  
 
-        # expense, date(use format), category, amount, description
-       
-        name = input("Enter the name of the expense (or 0 to exit):")
+        name = input("Enter the name of the expense (or 0 to exit): ").title()
         if name == '0':
             break
         
         date = modules_for_tracker.date_function()
         category = modules_for_tracker.category_function()
         amount = modules_for_tracker.amount_function()
-        description = input("Enter a description of the expense: ")
+        description = input("Enter a description of the expense: ").capitalize()
+        
 
         expenses.update({str(expense_item_number): {
             "name": name,
@@ -49,6 +46,7 @@ def enter_expenses():
 
         expense_item_number+=1
         write_expense_to_json()
+        modules_for_tracker.sum(expenses)
 
         
 def read_expenses_from_json():
@@ -70,4 +68,4 @@ def write_expense_to_json():
 if __name__ == "__main__":
     main()
 
-# I AM MAKING A CHANGE TO SEE IF I CAN UPLOAD THIS AND HOW GIT WORKS
+
